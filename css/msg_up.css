@@ -1,0 +1,112 @@
+header {
+	border: transparent;
+	height: 2.5em;
+	background-color: #F9F9F9;
+}
+.mui-bar {
+	height: 40px;
+}
+.mui-bar-tab{
+	height: 40px;
+}
+.mui-bar-tab .mui-tab-item{
+	height: 40px;
+}
+.mui-bar-nav {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.width {
+    width: 87%;
+    margin: 0 auto;
+}
+.up-time{
+	text-align: center;
+	font-size: .6em;
+	color: #929292;
+}
+.up-bg {
+    background-color: #fff;
+    box-shadow: .1em .1em .1em #EAEAEA;
+}
+.up-list {
+    margin: 0 auto;	
+}
+.up-img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+.imgbox {
+    position: relative;
+    overflow: hidden;
+    width: 95%;
+    margin: 1.2em auto 0;
+    text-align: center;
+    vertical-align: middle;
+    opacity: 1;
+    border: .1em solid #efefef;
+    background: #fff none repeat scroll 0 0;
+}
+.up-img span {
+    font-size: 1em;
+    font-weight: bold;
+    color: #403a3a;
+}
+.up-img img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    border-bottom: .1em solid #EAEAEA;
+}
+.up-bottom {
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+    padding:.5em 0;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: .1em solid #EFEFEF;
+}
+.up-bottom .title{
+	text-align: center;
+}
+.up-bottom .title span {
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    text-align: justify;
+    color: #403a3a;
+}
+.up-state {
+    width: 95%;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding: .5em 0;
+}
+.up-state a span {
+    font-weight: bold;	
+    font-size: .8em;
+}
+.state1 {
+    color: #2485fc;
+}
+#home {
+    background: url(../images/footer/Home.png) no-repeat center center;
+}
+#msg {
+    background: url(../images/footer/msg.png) no-repeat center center;
+    margin-right: 1em;
+}
+#camera {
+    background: url(../images/footer/camera.png) no-repeat center center;
+}
+#others {
+    background: url(../images/footer/others.png) no-repeat center center;
+    margin-left: 1em;
+}
+#personal {
+    background: url(../images/footer/personal.png) no-repeat center center;
+}

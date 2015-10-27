@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Facescores</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/common.css" rel="stylesheet" />
+		<link href="css/center.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/swiper.3.1.2.min.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="width90">
+				<div class="head_img">
+					<img src="images/es.jpg" alt="" />
+				</div>
+				<div class="mood">
+					<p>本大爷要炸了地球！！！不要拦我~</p>
+				</div>
+			</div>
+		</header>
+		<div class="mui_content">
+			<div class="user_info width90">
+				<ul>
+					<li class="name">南小鸟</li>
+					<li id="age"><span>23</span></li>
+					<li class="place"></li>
+					<li class="placeName">日本东京</li>
+					<li class="sign">射手座</li>
+				</ul>
+			</div>
+			<div class="tag width90">
+				<ul>
+					<li id="ml0">狂</li>
+					<li>炫</li>
+					<li>酷</li>
+					<li>霸</li>
+					<li>吊</li>
+					<li>更多</li>
+				</ul>
+			</div>
+			<div class="album">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="images/img2.png"/></div>
+						<div class="swiper-slide"><img src="images/img2.png"/></div>
+						<div class="swiper-slide"><img src="images/img2.png"/></div>
+					</div>
+
+					<!-- 如果需要导航按钮 -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+
+					<!-- 如果需要滚动条 -->
+					<div class="swiper-scrollbar"></div>
+				</div>
+			</div>
+			<div class="btn">
+				<a href="">一起来嘛~</a>
+			</div>
+			<div class="infoNum">
+				<div class="heart row">
+					<img src="images/footer/HeartR.png"/>
+				</div>
+				<div class="eye row">
+					<img src="images/footer/Eye.png" alt="" />
+				</div>
+				<div class="star row">
+					<img src="images/footer/Star.png"/>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/swiper.3.1.2.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			 mui.init();
+			var header_w = document.body.clientWidth;
+						var mySwiper = new Swiper('.swiper-container', {
+				direction: 'horizontal',
+				loop: true,
+				// 如果需要前进后退按钮
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				// 如果需要滚动条
+				scrollbar: '.swiper-scrollbar',
+			})
+		</script>
+	</body>
+
+</html>

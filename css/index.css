@@ -1,0 +1,193 @@
+@charset "UTF-8";
+header {
+	border: transparent;
+	height: 2.5em;
+	background-color: #F9F9F9;
+}
+.mui-bar {
+	border-bottom: 1px solid #AAAAAA;
+}
+.mui-bar-nav {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.header_list {
+	width: 70%;
+	margin: 0 auto;
+}
+.header_list li {
+	width: 25%;
+	float: left;
+}
+#place {
+	background: url(../images/header/place.png) no-repeat center center;
+	background-size: 50%;
+}
+#male {
+	background: url(../images/header/male.png) no-repeat center center;
+	background-size: 50%;
+}
+#female {
+	background: url(../images/header/female.png) no-repeat center center;
+	background-size: 50%;
+}
+#color {
+	background: url(../images/header/color.png) no-repeat center center;
+	background-size: 50%;
+}
+header a {
+	display: block;
+	width: 100%;
+	height: 2.5em;
+}
+.mui-off-canvas-left{
+	width: 100%;
+	/*height: 100%;*/
+}
+
+.mui-content-padded {
+	margin: 0;
+	margin-top: 2.5em;
+}
+.mui-table-view {
+	margin-top: 2.5em;
+	background-color: #fff;
+}
+.imgbox {
+	padding-top: .5em;
+	width: 96%;
+	margin-left: 2%;
+	margin-right: 2%;
+	background-color: #ffffff;
+}
+.imgbox img {
+	width: 90%;
+}
+.imgtext {
+	width: 88%;
+	/*margin-left: 2%;
+	margin-right: 2%;*/
+	
+	background-color: #ffffff;
+	margin: 0 auto;
+}
+.userId {
+	/*padding-top: .5em;
+	margin-left: 5%;
+    text-align: left;*/
+}
+.userInfo {
+	width: 100%;
+	background-color: #ffffff;
+	float: left;
+	font-size: .8em;
+	margin-top: -.5em;
+}
+.userInfo .fire {
+	width: 33%;
+	float: left
+}
+.userInfo .heart {
+	width: 33%;
+	float: left;
+}
+.userInfo .low {
+	width: 33%;
+	float: left
+}
+.fire img {
+	width: .9em;
+	height: .8em;
+}
+.heart img {
+	width: 1em;
+}
+.low img {
+	width: .8em;
+}
+.imglist {
+	border-radius: .5em;
+}
+.imgbox {
+	padding-top: .5em;
+}
+.id {
+	margin-top: .3em;
+}
+.age {
+	margin-top: .3em;
+	width: 33%;
+}
+.imgtext span {
+	font-size: .7em;
+}
+.imgtext i {
+	font-size: 1.6em;
+	font-style: normal;
+	color: #FBDF4F;
+}
+.imgtext em {
+	font-size: 1em;
+	font-style: normal;
+	color: #FBDF4F;
+}
+.point {
+	width: 33%;
+}
+.imgtext .sex {
+	background: url(../images/content/sex_female.png) no-repeat center;
+	background-size: 100%;
+	display: inline-block;
+	width: 31px;
+	height: 14px;
+	text-align: right;
+	color: #fff;
+	font-size: .5em;
+	line-height: 14px;
+}
+.mui-table-view.mui-grid-view {
+	padding: 0;
+}
+.mui-table-view.mui-grid-view .mui-table-view-cell {
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+}
+.mui-bar-tab {
+	height: 40px;
+}
+.mui-bar-tab .mui-tab-item {
+	height: 40px;
+}
+/*.mui-bar{
+	padding: 0;
+}*/
+
+.mui-bar-tab {
+	/*border-color: transparent;
+    height: 2.5em;*/
+	
+	background-color: rgba(213, 225, 226, .8);
+	/*border-bottom: 1px solid #d5e1e2;*/
+}
+#home {
+	background: url(../images/footer/Home.png) no-repeat center center;
+}
+#msg {
+	background: url(../images/footer/msg.png) no-repeat center center;
+	margin-right: 1em;
+}
+#camera {
+	background: url(../images/footer/camera.png) no-repeat center center;
+}
+#others {
+	background: url(../images/footer/others.png) no-repeat center center;
+	margin-left: 1em;
+}
+#personal {
+	background: url(../images/footer/personal.png) no-repeat center center;
+}
+footer a {
+	display: block;
+	height: 1.8em;
+}

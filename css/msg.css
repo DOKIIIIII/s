@@ -1,0 +1,51 @@
+#home {
+    background: url(../images/footer/Home.png) no-repeat center center;
+}
+#msg {
+    background: url(../images/footer/msg.png) no-repeat center center;
+    margin-right: 1em;
+}
+#camera {
+    background: url(../images/footer/camera.png) no-repeat center center;
+}
+#others {
+    background: url(../images/footer/others.png) no-repeat center center;
+    margin-left: 1em;
+}
+#personal {
+    background: url(../images/footer/personal.png) no-repeat center center;
+}
+header {
+	border: transparent;
+	height: 2.5em;
+	background-color: #F9F9F9;
+}
+.mui-bar {
+	border-bottom: 1px solid #AAAAAA;
+}
+.mui-bar-nav {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.row{
+	width: 87%;
+	margin: 0 auto;
+	border-bottom: .1em solid #eaeaea;
+	padding: 1em 0;
+}
+.imgbox{
+	display: inline-block;
+}
+.text{
+	display: inline-block;
+	margin-left: 1em;
+	position: relative;
+}
+.text_top{
+	display: inline-block;
+}
+.text_top i{
+	font-style: normal;
+	font-size: .8em;
+	color: #555555;
+}

@@ -1,0 +1,47 @@
+#home {
+    background: url(../images/footer/Home.png) no-repeat center center;
+}
+#msg {
+    background: url(../images/footer/msg.png) no-repeat center center;
+    margin-right: 1em;
+}
+#camera {
+    background: url(../images/footer/camera.png) no-repeat center center;
+}
+#others {
+    background: url(../images/footer/others.png) no-repeat center center;
+    margin-left: 1em;
+}
+#personal {
+    background: url(../images/footer/personal.png) no-repeat center center;
+}
+.mui-bar {
+	height: 40px;
+}
+.mui-bar-tab{
+	height: 40px;
+}
+.mui-bar-tab .mui-tab-item{
+	height: 40px;
+}
+.mui-bar-nav {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.sys{
+	width: 87%;
+	margin: .5em auto 0;
+	background-color: #f9f9f9;
+	padding: .5em;
+	border-radius: .5em;
+}
+.sys_top{
+	border-bottom: .1em solid #eaeaea;
+}
+.title{
+	font-size: .8em;
+}
+.time{
+	font-size: .7em;
+	float: right;
+}
