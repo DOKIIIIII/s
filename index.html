@@ -1,396 +1,523 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A basic demo of Cropper.">
+  <meta name="keywords" content="HTML, CSS, JS, JavaScript, image cropping, cropper, cropperjs, cropper.js, front-end, web development">
+  <meta name="author" content="Fengyuan Chen">
+  <title>Cropper.js</title>
+  <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/cropper.css">
+  <link rel="stylesheet" href="css/main.css">
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>Facescores</title>
-		<meta http-equiv="content-script-type" content="text/javascript">
-			
-	    <meta http-equiv="content-script-type"content="text/javascript">
-        <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
-        <script src="json/index.js"></script>
-			
-			
-		<link href="css/mui.css" rel="stylesheet" />
-		<link href="css/common.css" rel="stylesheet" />
-		<link href="css/index.css" rel="stylesheet" />
-		<link href="css/mui.indexedlist.css" rel="stylesheet" />
-		<!--<style>
-			html,
-			body {
-				height: 100%;
-				overflow: hidden;
-			}
-			/*.mui-bar {
-				-webkit-box-shadow: none;
-				box-shadow: none;
-			}*/
-		</style>-->
-		<style>
-			.mui-indexed-list-bar {
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar navbar-inverse navbar-static-top docs-header" id="top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-target="#navbar-collapse-1" data-toggle="collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./">Cropper.js</a>
+      </div>
+      <nav class="collapse navbar-collapse" id="navbar-collapse-1" role="navigation">
+        <p class="navbar-text">JavaScript image cropper.</p>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/fengyuanchen/cropperjs/blob/master/README.md">Docs</a></li>
+          <li><a href="https://github.com/fengyuanchen/cropperjs">GitHub</a></li>
+          <li><a href="http://chenfengyuan.com">About</a></li>
+          <li><a href="http://fengyuanchen.github.io">More</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    z-index: 9999;
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <!-- <h3 class="page-header">Demo:</h3> -->
+        <div class="img-container">
+          <img src="../assets/img/picture.jpg" alt="Picture">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <!-- <h3 class="page-header">Preview:</h3> -->
+        <div class="docs-preview clearfix">
+          <div class="img-preview preview-lg"></div>
+          <div class="img-preview preview-md"></div>
+          <div class="img-preview preview-sm"></div>
+          <div class="img-preview preview-xs"></div>
+        </div>
 
-}
-		</style>
-		
-	</head>
+        <!-- <h3 class="page-header">Data:</h3> -->
+        <div class="docs-data">
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataX">X</label>
+            <input type="text" class="form-control" id="dataX" placeholder="x">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataY">Y</label>
+            <input type="text" class="form-control" id="dataY" placeholder="y">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataWidth">Width</label>
+            <input type="text" class="form-control" id="dataWidth" placeholder="width">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataHeight">Height</label>
+            <input type="text" class="form-control" id="dataHeight" placeholder="height">
+            <span class="input-group-addon">px</span>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataRotate">Rotate</label>
+            <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+            <span class="input-group-addon">deg</span>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataScaleX">ScaleX</label>
+            <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="input-group-addon" for="dataScaleY">ScaleY</label>
+            <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="actions">
+      <div class="col-md-9 docs-buttons">
+        <!-- <h3 class="page-header">Toolbar:</h3> -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;move&quot;)">
+              <span class="fa fa-arrows"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;crop&quot;)">
+              <span class="fa fa-crop"></span>
+            </span>
+          </button>
+        </div>
 
-	<body>
-		
-		
-		<div id="offCanvasWrapper" class="mui-off-canvas-wrap">
-			<!--侧滑菜单部分-->
-			<aside id="offCanvasSide" class="mui-off-canvas-left">
-				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+              <span class="fa fa-search-plus"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+              <span class="fa fa-search-minus"></span>
+            </span>
+          </button>
+        </div>
 
-						<!--<div class="content">
-							这是可拖动式侧滑菜单示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式： 1.在手机屏幕任意位置向左拖动(drag)；2.点击本侧滑菜单页之外的任意位置; 3.点击如下红色按钮
-							<span class="android-only">；4.Android手机按back键；5.Android手机按menu键
-							</span>。
-							
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+              <span class="fa fa-arrow-left"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+              <span class="fa fa-arrow-right"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+              <span class="fa fa-arrow-up"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+              <span class="fa fa-arrow-down"></span>
+            </span>
+          </button>
+        </div>
 
-						</div>-->
-						<div class="mui-content">
-			<div id='list' class="mui-indexed-list">
-				
-				<div class="mui-indexed-list-search mui-input-row mui-search">
-					<input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索机场">
-				</div>
-				
-				
-				<div class="mui-indexed-list-bar">
-					<a>A</a>
-					<a>B</a>
-					<a>C</a>
-					<a>D</a>
-					<a>E</a>
-					<a>F</a>
-					<a>G</a>
-					<a>H</a>
-					<a>I</a>
-					<a>J</a>
-					<a>K</a>
-					<a>L</a>
-					<a>M</a>
-					<a>N</a>
-					<a>O</a>
-					<a>P</a>
-					<a>Q</a>
-					<a>R</a>
-					<a>S</a>
-					<a>T</a>
-					<a>U</a>
-					<a>V</a>
-					<a>W</a>
-					<a>X</a>
-					<a>Y</a>
-					<a>Z</a>
-				</div>
-				
-				<div class="mui-indexed-list-alert"></div>
-				<div class="mui-indexed-list-inner">
-					<div class="mui-indexed-list-empty-alert">没有数据</div>
-					
-					<ul class="mui-table-view">
-						<li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>
-						<li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item">阿克苏机场</li>
-						<li data-value="BPL" data-tags="ALaShanKou" class="mui-table-view-cell mui-indexed-list-item">阿拉山口机场</li>
-						<li data-value="AAT" data-tags="ALeTai" class="mui-table-view-cell mui-indexed-list-item">阿勒泰机场</li>
-						<li data-value="NGQ" data-tags="ALiKunSha" class="mui-table-view-cell mui-indexed-list-item">阿里昆莎机场</li>
-						<li data-value="AQG" data-tags="AnQingTianZhuShan" class="mui-table-view-cell mui-indexed-list-item">安庆天柱山机场</li>
-						<li data-value="MFM" data-tags="AoMenGuoJi" class="mui-table-view-cell mui-indexed-list-item">澳门国际机场</li>
-						<li data-group="B" class="mui-table-view-divider mui-indexed-list-group">B</li>
-						<li data-value="BSD" data-tags="BaoShan" class="mui-table-view-cell mui-indexed-list-item">保山机场</li>
-						<li data-value="BAV" data-tags="BaoTou" class="mui-table-view-cell mui-indexed-list-item">包头机场</li>
-						<li data-value="BHY" data-tags="BeiHaiFuCheng" class="mui-table-view-cell mui-indexed-list-item">北海福成机场</li>
-						<li data-value="NAY" data-tags="BeiJingNanYuan" class="mui-table-view-cell mui-indexed-list-item">北京南苑机场</li>
-						<li data-value="PEK" data-tags="BeiJingShouDuGuoJi" class="mui-table-view-cell mui-indexed-list-item">北京首都国际机场</li>
-						<li data-group="C" class="mui-table-view-divider mui-indexed-list-group">C</li>
-						<li data-value="NBS" data-tags="ChangBaiShan" class="mui-table-view-cell mui-indexed-list-item">长白山机场</li>
-						<li data-value="CGQ" data-tags="ChangChunLongJiaGuoJi" class="mui-table-view-cell mui-indexed-list-item">长春龙嘉国际机场</li>
-						<li data-value="CGD" data-tags="ChangDeTaoHuaYuan" class="mui-table-view-cell mui-indexed-list-item">常德桃花源机场</li>
-						<li data-value="BPX" data-tags="ChangDuBangDa" class="mui-table-view-cell mui-indexed-list-item">昌都邦达机场</li>
-						<li data-value="CSX" data-tags="ChangShaHuangHuaGuoJi" class="mui-table-view-cell mui-indexed-list-item">长沙黄花国际机场</li>
-						<li data-value="CIH" data-tags="ChangZhiWangCun" class="mui-table-view-cell mui-indexed-list-item">长治王村机场</li>
-						<li data-value="CZX" data-tags="ChangZhouBenNiu" class="mui-table-view-cell mui-indexed-list-item">常州奔牛机场</li>
-						<li data-value="CTU" data-tags="ChengDuShuangLiuGuoJi" class="mui-table-view-cell mui-indexed-list-item">成都双流国际机场</li>
-						<li data-value="CIF" data-tags="ChiFeng" class="mui-table-view-cell mui-indexed-list-item">赤峰机场</li>
-						<li data-group="D" class="mui-table-view-divider mui-indexed-list-group">D</li>
-						<li data-value="DLU" data-tags="DaLi" class="mui-table-view-cell mui-indexed-list-item">大理机场</li>
-						<li data-value="DLC" data-tags="DaLianZhouShuiZiGuoJi" class="mui-table-view-cell mui-indexed-list-item">大连周水子国际机场</li>
-						<li data-value="DQA" data-tags="DaQingSaErTu" class="mui-table-view-cell mui-indexed-list-item">大庆萨尔图机场</li>
-						<li data-value="DAT" data-tags="DaTongDongWangZhuang" class="mui-table-view-cell mui-indexed-list-item">大同东王庄机场</li>
-						<li data-value="DAX" data-tags="DaZhouHeShi" class="mui-table-view-cell mui-indexed-list-item">达州河市机场</li>
-						<li data-value="DDG" data-tags="DanDongLangTou" class="mui-table-view-cell mui-indexed-list-item">丹东浪头机场</li>
-						<li data-value="LUM" data-tags="DeHongMangShi" class="mui-table-view-cell mui-indexed-list-item">德宏芒市机场</li>
-						<li data-value="DIG" data-tags="DiQingXiangGeLiLa" class="mui-table-view-cell mui-indexed-list-item">迪庆香格里拉机场</li>
-						<li data-value="DOY" data-tags="DongYing" class="mui-table-view-cell mui-indexed-list-item">东营机场</li>
-						<li data-value="DNH" data-tags="DunHuang" class="mui-table-view-cell mui-indexed-list-item">敦煌机场</li>
-						<li data-group="E" class="mui-table-view-divider mui-indexed-list-group">E</li>
-						<li data-value="DSN" data-tags="EErDuoSi" class="mui-table-view-cell mui-indexed-list-item">鄂尔多斯机场</li>
-						<li data-value="ENH" data-tags="EnShiXuJiaPing" class="mui-table-view-cell mui-indexed-list-item">恩施许家坪机场</li>
-						<li data-value="ERL" data-tags="ErLianHaoTeSaiWuSuGuoJi" class="mui-table-view-cell mui-indexed-list-item">二连浩特赛乌苏国际机场</li>
-						<li data-group="F" class="mui-table-view-divider mui-indexed-list-group">F</li>
-						<li data-value="FUG" data-tags="FuYangXiGuan" class="mui-table-view-cell mui-indexed-list-item">阜阳西关机场</li>
-						<li data-value="FOC" data-tags="FuZhouChangLeGuoJi" class="mui-table-view-cell mui-indexed-list-item">福州长乐国际机场</li>
-						<li data-group="G" class="mui-table-view-divider mui-indexed-list-group">G</li>
-						<li data-value="KOW" data-tags="GanZhouHuangJin" class="mui-table-view-cell mui-indexed-list-item">赣州黄金机场</li>
-						<li data-value="GOQ" data-tags="GeErMu" class="mui-table-view-cell mui-indexed-list-item">格尔木机场</li>
-						<li data-value="GYU" data-tags="GuYuanLiuPanShan" class="mui-table-view-cell mui-indexed-list-item">固原六盘山机场</li>
-						<li data-value="GYS" data-tags="GuangYuanPanLong" class="mui-table-view-cell mui-indexed-list-item">广元盘龙机场</li>
-						<li data-value="CAN" data-tags="GuangZhouBaiYunGuoJi" class="mui-table-view-cell mui-indexed-list-item">广州白云国际机场</li>
-						<li data-value="KWL" data-tags="GuiLinLiangJiangGuoJi" class="mui-table-view-cell mui-indexed-list-item">桂林两江国际机场</li>
-						<li data-value="KWE" data-tags="GuiYangLongDongBaoGuoJi" class="mui-table-view-cell mui-indexed-list-item">贵阳龙洞堡国际机场</li>
-						<li data-group="H" class="mui-table-view-divider mui-indexed-list-group">H</li>
-						<li data-value="HRB" data-tags="HaErBinTaiPingGuoJi" class="mui-table-view-cell mui-indexed-list-item">哈尔滨太平国际机场</li>
-						<li data-value="HMI" data-tags="HaMi" class="mui-table-view-cell mui-indexed-list-item">哈密机场</li>
-						<li data-value="HAK" data-tags="HaiKouMeiLanGuoJi" class="mui-table-view-cell mui-indexed-list-item">海口美兰国际机场</li>
-						<li data-value="HLD" data-tags="HaiLaErDongShanGuoJi" class="mui-table-view-cell mui-indexed-list-item">海拉尔东山国际机场</li>
-						<li data-value="HDG" data-tags="HanDan" class="mui-table-view-cell mui-indexed-list-item">邯郸机场</li>
-						<li data-value="HZG" data-tags="HanZhong" class="mui-table-view-cell mui-indexed-list-item">汉中机场</li>
-						<li data-value="HGH" data-tags="HangZhouXiaoShanGuoJi" class="mui-table-view-cell mui-indexed-list-item">杭州萧山国际机场</li>
-						<li data-value="HFE" data-tags="HeFeiLuoGangGuoJi" class="mui-table-view-cell mui-indexed-list-item">合肥骆岗国际机场</li>
-						<li data-value="HTN" data-tags="HeTian" class="mui-table-view-cell mui-indexed-list-item">和田机场</li>
-						<li data-value="HEK" data-tags="HeiHe" class="mui-table-view-cell mui-indexed-list-item">黑河机场</li>
-						<li data-value="HET" data-tags="HuHeHaoTeBaiTaGuoJi" class="mui-table-view-cell mui-indexed-list-item">呼和浩特白塔国际机场</li>
-						<li data-value="HIA" data-tags="HuaiAnLianShui" class="mui-table-view-cell mui-indexed-list-item">淮安涟水机场</li>
-						<li data-value="TXN" data-tags="HuangShanTunXiGuoJi" class="mui-table-view-cell mui-indexed-list-item">黄山屯溪国际机场</li>
-						<li data-group="J" class="mui-table-view-divider mui-indexed-list-group">J</li>
-						<li data-value="TNA" data-tags="JiNanYaoQiangGuoJi" class="mui-table-view-cell mui-indexed-list-item">济南遥墙国际机场</li>
-						<li data-value="JNG" data-tags="JiNingQuFu" class="mui-table-view-cell mui-indexed-list-item">济宁曲阜机场</li>
-						<li data-value="JXA" data-tags="JiXiXingKaiHu" class="mui-table-view-cell mui-indexed-list-item">鸡西兴凯湖机场</li>
-						<li data-value="JMU" data-tags="JiaMuSiDongJiao" class="mui-table-view-cell mui-indexed-list-item">佳木斯东郊机场</li>
-						<li data-value="JGN" data-tags="JiaYuGuan" class="mui-table-view-cell mui-indexed-list-item">嘉峪关机场</li>
-						<li data-value="JNZ" data-tags="JinZhouXiaoLingZi" class="mui-table-view-cell mui-indexed-list-item">锦州小岭子机场</li>
-						<li data-value="JDZ" data-tags="JingDeZhen" class="mui-table-view-cell mui-indexed-list-item">景德镇机场</li>
-						<li data-value="JGS" data-tags="JingGangShan" class="mui-table-view-cell mui-indexed-list-item">井冈山机场</li>
-						<li data-value="JIU" data-tags="JiuJiangLuShan" class="mui-table-view-cell mui-indexed-list-item">九江庐山机场</li>
-						<li data-value="JZH" data-tags="JiuZhaiHuangLong" class="mui-table-view-cell mui-indexed-list-item">九寨黄龙机场</li>
-						<li data-group="K" class="mui-table-view-divider mui-indexed-list-group">K</li>
-						<li data-value="KHG" data-tags="KaShi" class="mui-table-view-cell mui-indexed-list-item">喀什机场</li>
-						<li data-value="KRY" data-tags="KeLaMaYi" class="mui-table-view-cell mui-indexed-list-item">克拉玛依机场</li>
-						<li data-value="KCA" data-tags="KuCheGuiZi" class="mui-table-view-cell mui-indexed-list-item">库车龟兹机场</li>
-						<li data-value="KRL" data-tags="KuErLe" class="mui-table-view-cell mui-indexed-list-item">库尔勒机场</li>
-						<li data-value="KMG" data-tags="KunMingWuJiaBaGuoJi" class="mui-table-view-cell mui-indexed-list-item">昆明巫家坝国际机场</li>
-						<li data-group="L" class="mui-table-view-divider mui-indexed-list-group">L</li>
-						<li data-value="LXA" data-tags="LaSaGongGa" class="mui-table-view-cell mui-indexed-list-item">拉萨贡嘎机场</li>
-						<li data-value="LHW" data-tags="LanZhouZhongChuan" class="mui-table-view-cell mui-indexed-list-item">兰州中川机场</li>
-						<li data-value="LJG" data-tags="LiJiangSanYi" class="mui-table-view-cell mui-indexed-list-item">丽江三义机场</li>
-						<li data-value="HZH" data-tags="LiPing" class="mui-table-view-cell mui-indexed-list-item">黎平机场</li>
-						<li data-value="LYG" data-tags="LianYunGangBaiTaBu" class="mui-table-view-cell mui-indexed-list-item">连云港白塔埠机场</li>
-						<li data-value="LNJ" data-tags="LinCang" class="mui-table-view-cell mui-indexed-list-item">临沧机场</li>
-						<li data-value="LYI" data-tags="LinYi" class="mui-table-view-cell mui-indexed-list-item">临沂机场</li>
-						<li data-value="LZY" data-tags="LinZhiMiLin" class="mui-table-view-cell mui-indexed-list-item">林芝米林机场</li>
-						<li data-value="LZH" data-tags="LiuZhouBaiLian" class="mui-table-view-cell mui-indexed-list-item">柳州白莲机场</li>
-						<li data-value="LCX" data-tags="LongYanGuanZhiShan" class="mui-table-view-cell mui-indexed-list-item">龙岩冠豸山机场</li>
-						<li data-value="LZO" data-tags="LuZhouLanTian" class="mui-table-view-cell mui-indexed-list-item">泸州蓝田机场</li>
-						<li data-value="LYA" data-tags="LuoYangBeiJiao" class="mui-table-view-cell mui-indexed-list-item">洛阳北郊机场</li>
-						<li data-group="M" class="mui-table-view-divider mui-indexed-list-group">M</li>
-						<li data-value="NZH" data-tags="ManZhouLiXiJiao" class="mui-table-view-cell mui-indexed-list-item">满洲里西郊机场</li>
-						<li data-value="MIG" data-tags="MianYangNanJiao" class="mui-table-view-cell mui-indexed-list-item">绵阳南郊机场</li>
-						<li data-value="OHE" data-tags="MoHeGuLian" class="mui-table-view-cell mui-indexed-list-item">漠河古莲机场</li>
-						<li data-value="MDG" data-tags="MuDanJiangHaiLang" class="mui-table-view-cell mui-indexed-list-item">牡丹江海浪机场</li>
-						<li data-group="N" class="mui-table-view-divider mui-indexed-list-group">N</li>
-						<li data-value="KHN" data-tags="NanChangChangBeiGuoJi" class="mui-table-view-cell mui-indexed-list-item">南昌昌北国际机场</li>
-						<li data-value="NAO" data-tags="NanChongGaoPing" class="mui-table-view-cell mui-indexed-list-item">南充高坪机场</li>
-						<li data-value="NKG" data-tags="NanJingLuKouGuoJi" class="mui-table-view-cell mui-indexed-list-item">南京禄口国际机场</li>
-						<li data-value="NNG" data-tags="NanNingWuXu" class="mui-table-view-cell mui-indexed-list-item">南宁吴圩机场</li>
-						<li data-value="NTG" data-tags="NanTongXingDong" class="mui-table-view-cell mui-indexed-list-item">南通兴东机场</li>
-						<li data-value="NNY" data-tags="NanYangJiangYing" class="mui-table-view-cell mui-indexed-list-item">南阳姜营机场</li>
-						<li data-value="NGB" data-tags="NingBoLiSheGuoJi" class="mui-table-view-cell mui-indexed-list-item">宁波栎社国际机场</li>
-						<li data-group="P" class="mui-table-view-divider mui-indexed-list-group">P</li>
-						<li data-value="SYM" data-tags="PuErSiMao" class="mui-table-view-cell mui-indexed-list-item">普洱思茅机场</li>
-						<li data-group="Q" class="mui-table-view-divider mui-indexed-list-group">Q</li>
-						<li data-value="NDG" data-tags="QiQiHaErSanJiaZi" class="mui-table-view-cell mui-indexed-list-item">齐齐哈尔三家子机场</li>
-						<li data-value="SHP" data-tags="QinHuangDaoShanHaiGuan" class="mui-table-view-cell mui-indexed-list-item">秦皇岛山海关机场</li>
-						<li data-value="TAO" data-tags="QingDaoLiuTingGuoJi" class="mui-table-view-cell mui-indexed-list-item">青岛流亭国际机场</li>
-						<li data-value="JUZ" data-tags="QuZhou" class="mui-table-view-cell mui-indexed-list-item">衢州机场</li>
-						<li data-value="JJN" data-tags="QuanZhouJinJiang" class="mui-table-view-cell mui-indexed-list-item">泉州晋江机场</li>
-						<li data-group="R" class="mui-table-view-divider mui-indexed-list-group">R</li>
-						<li data-value="RKZ" data-tags="RiKaZeHePing" class="mui-table-view-cell mui-indexed-list-item">日喀则和平机场</li>
-						<li data-group="S" class="mui-table-view-divider mui-indexed-list-group">S</li>
-						<li data-value="SYX" data-tags="SanYaFengHuangGuoJi" class="mui-table-view-cell mui-indexed-list-item">三亚凤凰国际机场</li>
-						<li data-value="SWA" data-tags="ShanTouWaiSha" class="mui-table-view-cell mui-indexed-list-item">汕头外砂机场</li>
-						<li data-value="SHA" data-tags="ShangHaiHongQiaoGuoJi" class="mui-table-view-cell mui-indexed-list-item">上海虹桥国际机场</li>
-						<li data-value="PVG" data-tags="ShangHaiPuDongGuoJi" class="mui-table-view-cell mui-indexed-list-item">上海浦东国际机场</li>
-						<li data-value="SZX" data-tags="ShenChouBaoAnGuoJi" class="mui-table-view-cell mui-indexed-list-item">深圳宝安国际机场</li>
-						<li data-value="SHE" data-tags="ShenYangTaoXianGuoJi" class="mui-table-view-cell mui-indexed-list-item">沈阳桃仙国际机场</li>
-						<li data-value="SJW" data-tags="ShiJiaZhuangZhengDingGuoJi" class="mui-table-view-cell mui-indexed-list-item">石家庄正定国际机场</li>
-						<li data-value="WUX" data-tags="SuNanShuoFangGuoJi" class="mui-table-view-cell mui-indexed-list-item">苏南硕放国际机场</li>
-						<li data-group="T" class="mui-table-view-divider mui-indexed-list-group">T</li>
-						<li data-value="TCG" data-tags="TaCheng" class="mui-table-view-cell mui-indexed-list-item">塔城机场</li>
-						<li data-value="TYN" data-tags="TaiYuanWuSuGuoJi" class="mui-table-view-cell mui-indexed-list-item">太原武宿国际机场</li>
-						<li data-value="HYN" data-tags="TaiZhouLuQiao-HuangYanJiChang" class="mui-table-view-cell mui-indexed-list-item">台州路桥机场 (黄岩机场)</li>
-						<li data-value="TVS" data-tags="TangShanSanNvHe" class="mui-table-view-cell mui-indexed-list-item">唐山三女河机场</li>
-						<li data-value="TCZ" data-tags="TengChongTuoFeng" class="mui-table-view-cell mui-indexed-list-item">腾冲驼峰机场</li>
-						<li data-value="TSN" data-tags="TianJinBinHaiGuoJi" class="mui-table-view-cell mui-indexed-list-item">天津滨海国际机场</li>
-						<li data-value="TGO" data-tags="TongLiao" class="mui-table-view-cell mui-indexed-list-item">通辽机场</li>
-						<li data-value="TEN" data-tags="TongRenFengHuang" class="mui-table-view-cell mui-indexed-list-item">铜仁凤凰机场</li>
-						<li data-group="W" class="mui-table-view-divider mui-indexed-list-group">W</li>
-						<li data-value="WXN" data-tags="WanZhouWuQiao" class="mui-table-view-cell mui-indexed-list-item">万州五桥机场</li>
-						<li data-value="WEF" data-tags="WeiFang" class="mui-table-view-cell mui-indexed-list-item">潍坊机场</li>
-						<li data-value="WEH" data-tags="WeiHaiDaShuiBo" class="mui-table-view-cell mui-indexed-list-item">威海大水泊机场</li>
-						<li data-value="WNH" data-tags="WenShanPuZheHei" class="mui-table-view-cell mui-indexed-list-item">文山普者黑机场</li>
-						<li data-value="WNZ" data-tags="WenZhouYongQiangGuoJi" class="mui-table-view-cell mui-indexed-list-item">温州永强国际机场</li>
-						<li data-value="WUA" data-tags="WuHai" class="mui-table-view-cell mui-indexed-list-item">乌海机场</li>
-						<li data-value="WUH" data-tags="WuHanTianHeGuoJi" class="mui-table-view-cell mui-indexed-list-item">武汉天河国际机场</li>
-						<li data-value="HLH" data-tags="WuLanHaoTe" class="mui-table-view-cell mui-indexed-list-item">乌兰浩特机场</li>
-						<li data-value="URC" data-tags="WuLuMuQiDiWoBaoGuoJi" class="mui-table-view-cell mui-indexed-list-item">乌鲁木齐地窝堡国际机场</li>
-						<li data-value="WUS" data-tags="WuYiShan" class="mui-table-view-cell mui-indexed-list-item">武夷山机场</li>
-						<li data-value="WUZ" data-tags="WuZhouChangZhouDao" class="mui-table-view-cell mui-indexed-list-item">梧州长洲岛机场</li>
-						<li data-group="X" class="mui-table-view-divider mui-indexed-list-group">X</li>
-						<li data-value="XIY" data-tags="XiAnXianYangGuoJi" class="mui-table-view-cell mui-indexed-list-item">西安咸阳国际机场</li>
-						<li data-value="XIC" data-tags="XiChangQingShan" class="mui-table-view-cell mui-indexed-list-item">西昌青山机场</li>
-						<li data-value="XIL" data-tags="XiLinHaoTe" class="mui-table-view-cell mui-indexed-list-item">锡林浩特机场</li>
-						<li data-value="XNN" data-tags="XiNingCaoJiaBao" class="mui-table-view-cell mui-indexed-list-item">西宁曹家堡机场</li>
-						<li data-value="JHG" data-tags="XiShuangBanNaGaSa" class="mui-table-view-cell mui-indexed-list-item">西双版纳嘎洒机场</li>
-						<li data-value="XMN" data-tags="XiaMenGaoQiGuoJi" class="mui-table-view-cell mui-indexed-list-item">厦门高崎国际机场</li>
-						<li data-value="HKG" data-tags="XiangGangGuoJi" class="mui-table-view-cell mui-indexed-list-item">香港国际机场</li>
-						<li data-value="XFN" data-tags="XiangYangLiuJi" class="mui-table-view-cell mui-indexed-list-item">襄阳刘集机场</li>
-						<li data-value="ACX" data-tags="XingYi" class="mui-table-view-cell mui-indexed-list-item">兴义机场</li>
-						<li data-value="XUZ" data-tags="XuZhouGuanYin" class="mui-table-view-cell mui-indexed-list-item">徐州观音机场</li>
-						<li data-group="Y" class="mui-table-view-divider mui-indexed-list-group">Y</li>
-						<li data-value="ENY" data-tags="YanAnErShiLiBao" class="mui-table-view-cell mui-indexed-list-item">延安二十里堡机场</li>
-						<li data-value="YNZ" data-tags="YanCheng" class="mui-table-view-cell mui-indexed-list-item">盐城机场</li>
-						<li data-value="YNJ" data-tags="YanJiChaoYangChuan" class="mui-table-view-cell mui-indexed-list-item">延吉朝阳川机场</li>
-						<li data-value="YNT" data-tags="YanTaiLaiShanGuoJi" class="mui-table-view-cell mui-indexed-list-item">烟台莱山国际机场</li>
-						<li data-value="YBP" data-tags="YiBinCaiBa" class="mui-table-view-cell mui-indexed-list-item">宜宾菜坝机场</li>
-						<li data-value="YIH" data-tags="YiChangSanXia" class="mui-table-view-cell mui-indexed-list-item">宜昌三峡机场</li>
-						<li data-value="LDS" data-tags="YiChunLinDu" class="mui-table-view-cell mui-indexed-list-item">伊春林都机场</li>
-						<li data-value="YIN" data-tags="YiNing" class="mui-table-view-cell mui-indexed-list-item">伊宁机场</li>
-						<li data-value="YIW" data-tags="YiWu" class="mui-table-view-cell mui-indexed-list-item">义乌机场</li>
-						<li data-value="INC" data-tags="YinChuanHeDong" class="mui-table-view-cell mui-indexed-list-item">银川河东机场</li>
-						<li data-value="LLF" data-tags="YongZhouLingLing" class="mui-table-view-cell mui-indexed-list-item">永州零陵机场</li>
-						<li data-value="UYN" data-tags="YuLinYuYang" class="mui-table-view-cell mui-indexed-list-item">榆林榆阳机场</li>
-						<li data-value="YUS" data-tags="YuShuBaTang" class="mui-table-view-cell mui-indexed-list-item">玉树巴塘机场</li>
-						<li data-value="YCU" data-tags="YunChengZhangXiao" class="mui-table-view-cell mui-indexed-list-item">运城张孝机场</li>
-						<li data-group="Z" class="mui-table-view-divider mui-indexed-list-group">Z</li>
-						<li data-value="ZHA" data-tags="ZhanJiang" class="mui-table-view-cell mui-indexed-list-item">湛江机场</li>
-						<li data-value="ZAT" data-tags="ZhaoTong" class="mui-table-view-cell mui-indexed-list-item">昭通机场</li>
-						<li data-value="CGO" data-tags="ZhengZhouXinZhengGuoJi" class="mui-table-view-cell mui-indexed-list-item">郑州新郑国际机场</li>
-						<li data-value="HJJ" data-tags="ZhiJiang" class="mui-table-view-cell mui-indexed-list-item">芷江机场</li>
-						<li data-value="CKG" data-tags="ZhongQingJiangBeiGuoJi" class="mui-table-view-cell mui-indexed-list-item">重庆江北国际机场</li>
-						<li data-value="ZHY" data-tags="ZhongWeiXiangShan" class="mui-table-view-cell mui-indexed-list-item">中卫香山机场</li>
-						<li data-value="HSN" data-tags="ZhouShanZhuJiaJian" class="mui-table-view-cell mui-indexed-list-item">舟山朱家尖机场</li>
-						<li data-value="ZUH" data-tags="ZhuHaiSanZao" class="mui-table-view-cell mui-indexed-list-item">珠海三灶机场</li>						
-					</ul>
-					
-				</div>
-				
-			</div>
-			
-		</div>
-		
-						
-					</div>
-				</div>
-			</aside>
-			<!--主界面部分-->
-			<div class="mui-inner-wrap">
-				
-				<header class="mui-bar mui-bar-nav">
-			<div class="header_list">
-				<ul>
-					<li>
-						<a href="#offCanvasSide" id="place"></a>
-					</li>
-					<li>
-						<a href="#" id="male"></a>
-					</li>
-					<li>
-						<a href="#" id="female"></a>
-					</li>
-					<li>
-						<a href="#popover" id="color"></a>
-					</li>
-				</ul>
-			</div>
-			
-		</header>
-				
-				
-				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
-					<div class="mui-scroll">
-					
-						<div class="mui-content-padded">
-							<div class="mui-table-view mui-grid-view" id="myTableView" >
-								
-							</div>
-						</div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+              <span class="fa fa-rotate-left"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+              <span class="fa fa-rotate-right"></span>
+            </span>
+          </button>
+        </div>
 
-					</div>
-				</div>
-				<!-- off-canvas backdrop -->
-				<div class="mui-off-canvas-backdrop"></div>
-				
-				
-				<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#tabbar" id="home"> <span class="mui-icon "></span></a>
-			<a class="mui-tab-item" href="#tabbar-with-chat" id="msg"> <span class="mui-icon "> </span></a>
-			<a class="mui-tab-item" href="#tabbar-with-sms" id="camera"> <span class="mui-icon "> </span></a>
-			<a class="mui-tab-item" href="#tabbar-with-map" id="others"> <span class="mui-icon "> </span></a>
-			<a class="mui-tab-item" href="#tabbar-with-map" id="personal"><span class="mui-icon "> </span></a>
-		</nav>
-				
-				
-			</div>
-		</div>
-		
-		
-		
-		
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-flip="horizontal" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+              <span class="fa fa-arrows-h"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-flip="vertical" data-method="scaleY" data-option="-1" title="Flip Vertical">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+              <span class="fa fa-arrows-v"></span>
+            </span>
+          </button>
+        </div>
 
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
+              <span class="fa fa-check"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="clear" title="Clear">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
+              <span class="fa fa-remove"></span>
+            </span>
+          </button>
+        </div>
 
-		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
-		<script src="js/mui.min.js"></script>
-		<script src="js/mui.indexedlist.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.init();
-			
-			mui.ready(function() {
-				var list = document.getElementById('list');
-				//calc hieght
-				list.style.height = (document.body.offsetHeight ) + 'px';
-				//create
-				window.indexedList = new mui.IndexedList(list);
-			});
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="disable" title="Disable">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.disable()">
+              <span class="fa fa-lock"></span>
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="enable" title="Enable">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.enable()">
+              <span class="fa fa-unlock"></span>
+            </span>
+          </button>
+        </div>
 
-			 //侧滑容器父节点
-			var offCanvasWrapper = mui('#offCanvasWrapper');
-			 //主界面容器
-			var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
-			 //菜单容器
-			var offCanvasSide = document.getElementById("offCanvasSide");
-			if (!mui.os.android) {
-//				document.getElementById("move-togger").classList.remove('mui-hidden');
-				var spans = document.querySelectorAll('.android-only');
-				for (var i = 0, len = spans.length; i < len; i++) {
-					spans[i].style.display = "none";
-				}
-			}
-			 //侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
-			var classList = offCanvasWrapper[0].classList;
-            classList.add('mui-slide-in');
-            offCanvasWrapper.offCanvas().refresh();
-			 //主界面和侧滑菜单界面均支持区域滚动；
-//			mui('#offCanvasSideScroll').scroll();
-			mui('#offCanvasContentScroll').scroll();
-			 //实现ios平台原生侧滑关闭页面；
-			if (mui.os.plus && mui.os.ios) {
-				mui.plusReady(function() { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
-					plus.webview.currentWebview().setStyle({
-						'popGesture': 'none'
-					});
-				});
-			}
-			
-			
-			
-			
-		</script>
-	</body>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+              <span class="fa fa-refresh"></span>
+            </span>
+          </button>
+          <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*" capture="camera">
+            <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+              <span class="fa fa-upload"></span>
+            </span>
+          </label>
+          <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.destroy()">
+              <span class="fa fa-power-off"></span>
+            </span>
+          </button>
+        </div>
 
+        <div class="btn-group btn-group-crop">
+          <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas()">
+              Get Cropped Canvas
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 160, height: 90 })">
+              160&times;90
+            </span>
+          </button>
+          <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 320, height: 180 })">
+              320&times;180
+            </span>
+          </button>
+        </div>
+
+        <!-- Show the cropped image in modal -->
+        <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
+              </div>
+              <div class="modal-body"></div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.png">Download</a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.modal -->
+
+        <button type="button" class="btn btn-primary" data-method="getData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getData()">
+            Get Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="setData" data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setData(data)">
+            Set Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="getContainerData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getContainerData()">
+            Get Container Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="getImageData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getImageData()">
+            Get Image Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="getCanvasData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCanvasData()">
+            Get Canvas Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="setCanvasData" data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setCanvasData(data)">
+            Set Canvas Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="getCropBoxData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCropBoxData()">
+            Get Crop Box Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="setCropBoxData" data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setCropBoxData(data)">
+            Set Crop Box Data
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="moveTo" data-option="0">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.moveTo(0)">
+            0,0
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="zoomTo" data-option="1">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoomTo(1)">
+            100%
+          </span>
+        </button>
+        <button type="button" class="btn btn-primary" data-method="rotateTo" data-option="180">
+          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotateTo(180)">
+            180°
+          </span>
+        </button>
+        <input type="text" class="form-control" id="putData" placeholder="Get data to here or set data with this value">
+
+      </div><!-- /.docs-buttons -->
+
+      <div class="col-md-3 docs-toggles">
+        <!-- <h3 class="page-header">Toggles:</h3> -->
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input type="radio" class="sr-only" id="aspectRatio0" name="aspectRatio" value="1.7777777777777777" checked>
+            <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 16 / 9">
+              16:9
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.3333333333333333">
+            <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 4 / 3">
+              4:3
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
+            <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 1 / 1">
+              1:1
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">
+            <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 2 / 3">
+              2:3
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="aspectRatio4" name="aspectRatio" value="NaN">
+            <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: NaN">
+              Free
+            </span>
+          </label>
+        </div>
+
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input type="radio" class="sr-only" id="viewMode0" name="viewMode" value="0" checked>
+            <span class="docs-tooltip" data-toggle="tooltip" title="View Mode 0">
+              VM0
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="viewMode1" name="viewMode" value="1">
+            <span class="docs-tooltip" data-toggle="tooltip" title="View Mode 1">
+              VM1
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="viewMode2" name="viewMode" value="2">
+            <span class="docs-tooltip" data-toggle="tooltip" title="View Mode 2">
+              VM2
+            </span>
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" class="sr-only" id="viewMode3" name="viewMode" value="3">
+            <span class="docs-tooltip" data-toggle="tooltip" title="View Mode 3">
+              VM3
+            </span>
+          </label>
+        </div>
+
+        <div class="dropdown dropup docs-options">
+          <button type="button" class="btn btn-primary btn-block dropdown-toggle" id="toggleOptions" data-toggle="dropdown" aria-expanded="true">
+            Toggle Options
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="toggleOptions">
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="responsive" checked>
+                responsive
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="restore" checked>
+                restore
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="checkCrossOrigin" checked>
+                checkCrossOrigin
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="checkOrientation" checked>
+                checkOrientation
+              </label>
+            </li>
+
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="modal" checked>
+                modal
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="guides" checked>
+                guides
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="center" checked>
+                center
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="highlight" checked>
+                highlight
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="background" checked>
+                background
+              </label>
+            </li>
+
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="autoCrop" checked>
+                autoCrop
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="movable" checked>
+                movable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="rotatable" checked>
+                rotatable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="scalable" checked>
+                scalable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="zoomable" checked>
+                zoomable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="zoomOnTouch" checked>
+                zoomOnTouch
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="zoomOnWheel" checked>
+                zoomOnWheel
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="cropBoxMovable" checked>
+                cropBoxMovable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="cropBoxResizable" checked>
+                cropBoxResizable
+              </label>
+            </li>
+            <li role="presentation">
+              <label class="checkbox-inline">
+                <input type="checkbox" name="toggleDragModeOnDblclick" checked>
+                toggleDragModeOnDblclick
+              </label>
+            </li>
+          </ul>
+        </div><!-- /.dropdown -->
+      </div><!-- /.docs-toggles -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="docs-footer">
+    <div class="container">
+      <span class="hearts"></span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../dist/cropper.js"></script>
+  <script src="js/main.js"></script>
+</body>
 </html>
